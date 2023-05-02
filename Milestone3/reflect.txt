@@ -1,0 +1,36 @@
+// Name: Juan David Avendano
+// Seneca Student ID: 165095217
+// Seneca email: javendano-ariza@myseneca.ca
+// Date of completion: 08 April 2023
+
+
+In the following reflection, I would like to talk about the topics that require more time, attention, and understanding to achieve my final solution for the project.
+
+1) The extern keyword specifies that the variables are declared in another translation unit (i.e., source file) and that their definitions will be provided by a different source file at link time. We use that yo declare the deques that contain the completed, incompleted and pending orders in our application.
+	extern std::deque<CustomerOrder> g_pending;
+	extern std::deque<CustomerOrder> g_completed;
+	extern std::deque<CustomerOrder> g_incomplete;
+
+2) Customer Order Class:
+Overall, the relationships between the Item and CustomerOrder classes are that CustomerOrder instances contain one or more Item objects. The m_lstItem data component in CustomerOrder is an array of pointers to Item objects, allowing for dynamic storage of Item objects in a particular order.
+
+The static m_widthField data member in the CustomerOrder class is a class-level variable that is shared by all CustomerOrder instances. This is an example of a static variable in object-oriented programming, which allows a variable to be shared by all instances of a class.
+
+
+	class CustomerOrder
+	{
+		std::string m_name;
+		std::string m_product;
+		size_t m_cntItem;
+		Item** m_lstItem{nullptr};
+		static size_t m_widthField;
+	....
+	}
+3) STL Algorithms 
+std::find_if() - This algorithm looks through a set of elements for the first one that matches a particular predicate. It requires three arguments: the start and end of the search range, as well as a unary predicate that determines the search criteria. The range being searched in this code is stations.begin() and stations.end(), and the predicate is a lambda function that tests whether the getItemName() method of a particular Workstation object returns a string that matches the value of the fStn variable. The lambda function accepts a Workstation* object as input and captures the fStn variable by value.
+The std::find_if() technique is used to find the first Workstation object in the stations container that meets the stated criteria. When the appropriate object is discovered, its pointer is assigned.
+
+        auto firstStation = std::find_if(stations.begin(), stations.end(), [&](Workstation* station) {
+            return station->getItemName() == fStn;
+            });
+        m_firstStation = *firstStation;
